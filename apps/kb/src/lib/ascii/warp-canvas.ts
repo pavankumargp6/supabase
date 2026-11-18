@@ -463,6 +463,8 @@ export const startWarpCanvas = () => {
   const resizeObserver = new ResizeObserver(measure)
   resizeObserver.observe(host)
   resizeObserver.observe(anchor)
+  // a font swap moves the glyphs but does not resize the anchor, so the observer does not fire
+  document.fonts.addEventListener('loadingdone', measure)
   // a pinch zoom changes only the visual viewport scale, so the layers resize for it too
   visualViewport?.addEventListener('resize', measure)
 
